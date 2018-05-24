@@ -9,9 +9,20 @@ export class AppComponent {
   title = 'my awesome app';
   isAuth = false;
 
-  deviceOne = 'Machine à laver';
-  deviceTwo = 'Ordinateur';
-  deviceThree = 'Frigo';
+  devices = [
+    {
+      name: 'Machine à laver',
+      status: 'éteint'
+    },
+    {
+      name: 'Frigo',
+      status: 'allumé'
+    },
+    {
+      name: 'Ordinateur',
+      status: 'éteint'
+    }
+  ];
 
   constructor() {
     setTimeout(
