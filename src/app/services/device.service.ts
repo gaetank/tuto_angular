@@ -21,4 +21,12 @@ export class DeviceService {
       switchOffAll() {
         this.devices.forEach(device => device.status = 'éteint')
       }
+
+      switchOnOne(i: number) {
+        this.devices[i].status = 'allumé'
+      }
+
+      switchOffOne(i: number) {
+        this.devices[i].status = 'éteint'
+      }
 }

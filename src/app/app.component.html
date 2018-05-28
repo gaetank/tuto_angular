@@ -24,7 +24,11 @@
     <div class="col-xs-12">
       <h2>Mes appareils</h2>
       <ul class="list-group">
-        <app-device *ngFor="let device of devices" [deviceName]="device.name" [deviceStatus]="device.status"></app-device>
+        <app-device *ngFor="let device of devices; let i = index"
+          [deviceName]="device.name" 
+          [deviceStatus]="device.status"
+          [index]="i">
+        </app-device>
       </ul>
       
       <button class="btn btn-success"
