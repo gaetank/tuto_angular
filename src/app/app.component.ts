@@ -1,30 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DeviceService } from 'src/app/services/device.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'my awesome app';
   isAuth = false;
+  devices: any[];
 
-  devices = [
-    {
-      name: 'Machine à laver',
-      status: 'éteint'
-    },
-    {
-      name: 'Frigo',
-      status: 'allumé'
-    },
-    {
-      name: 'Ordinateur',
-      status: 'éteint'
-    }
-  ];
-
-  constructor() {
+  constructor(private deviceService: DeviceService) {
     setTimeout(
       () => {
         this.isAuth = true;
@@ -32,7 +19,15 @@ export class AppComponent {
     );
   }
 
+  ngOnInit() {
+    this.devices = this.deviceService.devices;
+  }
+
   onAllumer() {
-    console.log('On allume tout !')
+    this.deviceService.switchOnAll();
+  }
+
+  onEteindre() {
+    this.deviceService.switchOffAll();
   }
 }
