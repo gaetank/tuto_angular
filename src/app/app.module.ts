@@ -12,12 +12,15 @@ import { Routes } from '@angular/router'
 import { RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { SingleDeviceComponent } from './single-device/single-device.component';
+import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 
 const appRoutes: Routes = [
   { path: 'auth', component: AuthComponent },
   { path: 'devices', component: DeviceViewComponent },
   { path: 'devices/:id', component: SingleDeviceComponent },
-  { path: '', component: DeviceViewComponent }
+  { path: '', component: DeviceViewComponent },
+  { path: 'not-found', component: FourOhFourComponent },
+  { path: '***', redirectTo: 'not-found' }
 ];
 
 @NgModule({
@@ -27,7 +30,8 @@ const appRoutes: Routes = [
     DeviceComponent,
     AuthComponent,
     DeviceViewComponent,
-    SingleDeviceComponent
+    SingleDeviceComponent,
+    FourOhFourComponent
   ],
   imports: [
     BrowserModule,
