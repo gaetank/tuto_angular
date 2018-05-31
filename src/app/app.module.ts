@@ -21,7 +21,7 @@ const appRoutes: Routes = [
   { path: 'devices/:id', canActivate: [AuthGuard], component: SingleDeviceComponent },
   { path: '', component: DeviceViewComponent },
   { path: 'not-found', component: FourOhFourComponent },
-  { path: '***', redirectTo: 'not-found' }
+  { path: '**', redirectTo: 'not-found' }
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceService } from 'src/app/services/device.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-device-view',
@@ -9,6 +10,7 @@ import { DeviceService } from 'src/app/services/device.service';
 export class DeviceViewComponent implements OnInit {
 
   devices: any[];
+  deviceSubscription: Subscription;
   isAuth: boolean = false;
 
   lastUpdate = new Promise((resolve, reject) => {
@@ -29,7 +31,12 @@ export class DeviceViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.devices = this.deviceService.devices
+    this.deviceSubscription = this.deviceService.devicesSubject.subscribe(
+      (devices: any[]) => {
+        this.devices = devices;
+      }
+    );
+    this.deviceService.emitDeviceSubject();
   }
 
   onAllumer() {

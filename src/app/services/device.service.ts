@@ -1,5 +1,10 @@
+import { Subject } from 'rxjs/Subject'
+
 export class DeviceService {
-    devices = [
+    
+  devicesSubject = new Subject<any[]>();
+  
+  private devices = [
         {
           id: 1,
           name: 'Machine à laver',
@@ -19,18 +24,22 @@ export class DeviceService {
 
       switchOnAll() {
         this.devices.forEach(device => device.status = 'allumé')
+        this.emitDeviceSubject()
       }
 
       switchOffAll() {
         this.devices.forEach(device => device.status = 'éteint')
+        this.emitDeviceSubject()
       }
 
       switchOnOne(i: number) {
         this.devices[i].status = 'allumé'
+        this.emitDeviceSubject()
       }
 
       switchOffOne(i: number) {
         this.devices[i].status = 'éteint'
+        this.emitDeviceSubject()
       }
 
       getAppareilById(id: number) {
@@ -40,5 +49,9 @@ export class DeviceService {
           }
         );
         return appareil;
+      }
+
+      emitDeviceSubject() {
+        this.devicesSubject.next(this.devices.slice())
       }
 }
