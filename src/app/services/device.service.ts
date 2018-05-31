@@ -51,6 +51,19 @@ export class DeviceService {
         return appareil;
       }
 
+      addDevice(name: string, status: string) {
+        const deviceObject = {
+          id: 0,
+          name: '',
+          status: ''
+        };
+        deviceObject.name = name;
+        deviceObject.status = status;
+        deviceObject.id = this.devices[(this.devices.length - 1)].id + 1;
+        this.devices.push(deviceObject);
+        this.emitDeviceSubject();
+      }
+
       emitDeviceSubject() {
         this.devicesSubject.next(this.devices.slice())
       }
