@@ -18,6 +18,7 @@ import { EditDeviceComponent } from './edit-device/edit-device.component';
 import { UserService } from 'src/app/services/user-service';
 import { UserListComponent } from './user-list/user-list.component';
 import { NewUserComponent } from 'src/app/new-user/new-user.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'auth', component: AuthComponent },
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

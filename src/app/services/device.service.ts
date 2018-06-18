@@ -1,10 +1,15 @@
 import { Subject } from 'rxjs/Subject'
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
+@Injectable()
 export class DeviceService {
     
   devicesSubject = new Subject<any[]>();
   
-  private devices = [
+  private devices;
+  /*
+  [
         {
           id: 1,
           name: 'Machine à laver',
@@ -21,6 +26,32 @@ export class DeviceService {
           status: 'éteint'
         }
       ];
+  */
+
+      constructor(private httpClient: HttpClient) {}
+
+      saveDevicesToServer() {
+        this.httpClient.put('https://tuto-angular-7a50e.firebaseio.com/devices.json', this.devices).subscribe(
+          (response) => {
+            this.devices = response;
+            this.emitDeviceSubject();
+          },
+          (error) => {
+            console.log('Erreur lors de l\'enregistrement ! : ' + error);
+          }
+        )
+      }
+
+      getDevicesFromServer() {
+        this.httpClient.get<any[]>('https://tuto-angular-7a50e.firebaseio.com/devices.json').subscribe(
+          () => {
+            console.log('Enregistrement terminé !');
+          },
+          (error) => {
+            console.log('Erreur lors de l\'enregistrement ! : ' + error);
+          }
+        )
+      }
 
       switchOnAll() {
         this.devices.forEach(device => device.status = 'allumé')
